@@ -25,9 +25,9 @@ function checkCountriesQuantity(countriesArrey) {
   if (quantity > 10) {
     Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
   } else if (quantity >= 2 && quantity <= 10) {
-    console.log(quantity);
+    refs.list.innerHTML = createMarkupForFewCountry(countriesArrey);
   } else {
-    createMarkupForOneCountry(countriesArrey);
+    refs.list.innerHTML = createMarkupForOneCountry(countriesArrey);
   }
 }
 
@@ -36,7 +36,16 @@ function createMarkupForOneCountry(country) {
 
   const langArray = Object.values(country[0].languages);
   const langString = langArray.join(', ');
-  const markUp = `<img class='${flags}' src='${flags.png}' alt='${capital}' /><h1 class='country'>${name.official}</h1><p class='capital'>${capital}</p><p class='population'>${population}</p><p class='languages'>${langString}</p>`;
+  return `<img class='${flags}' src='${flags.png}' alt='${capital}' /><h1 class='country'>${name.official}</h1><p class='capital'>${capital}</p><p class='population'>${population}</p><p class='languages'>${langString}</p>`;
+}
 
-  refs.list.innerHTML = markUp;
+function createMarkupForFewCountry(countries) {
+  return countries
+    .map(country => {
+      const { flags, name, capital, languages, population } = country;
+      const langArray = Object.values(country.languages);
+      const langString = langArray.join(', ');
+      return `<img class='${flags}' src='${flags.png}' alt='${capital}' /><h1 class='country'>${name.official}</h1><p class='capital'>${capital}</p><p class='population'>${population}</p><p class='languages'>${langString}</p>`;
+    })
+    .join(' ');
 }
