@@ -26,7 +26,7 @@ function onSearchCountry(e) {
   fetchCountries(countryName)
     .then(checkCountriesQuantity)
     .catch(err => {
-      Notiflix.Notify.failure('Qui timide rogat docet negare');
+      Notiflix.Notify.failure('Oops, there is no country with that name');
     });
 }
 
