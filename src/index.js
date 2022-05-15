@@ -16,18 +16,20 @@ refs.input.addEventListener('input', debounce(onSearchCountry, DEBOUNCE_DELAY));
 
 function onSearchCountry(e) {
   const countryName = e.target.value.trim();
+
   if (countryName === '') {
     refs.list.innerHTML = '';
     refs.descr.innerHTML = '';
     return;
   }
+
   fetchCountries(countryName).then(checkCountriesQuantity);
   // .catch(Notiflix.Notify.failure('Oops, there is no country with that name'));
 }
 
 function checkCountriesQuantity(countriesArrey) {
   const quantity = countriesArrey.length;
-  console.log(quantity);
+
   if (quantity > 10) {
     Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
   } else if (quantity >= 2 && quantity <= 10) {
@@ -44,17 +46,22 @@ function createMarkupForOneCountry(country) {
   const langString = langArray.join(', ');
   const headerMarkup = `<img class="flagImg" src='${flags.png}' alt='${name.official}' /><h1 class='country'>${name.official}</h1>`;
   const descriprionMarkup = `<p class='capital'>${capital}</p><p class='population'>${population}</p><p class='languages'>${langString}</p>`;
-  refs.list.innerHTML = headerMarkup;
-  refs.descr.innerHTML = descriprionMarkup;
+
+  redrawingMarkup(headerMarkup, descriprionMarkup);
 }
 
 function createMarkupForFewCountry(countries) {
   const headerMarkup = countries
     .map(country => {
-      const { flags, name, capital } = country;
+      const { flags, name } = country;
       return `<img class="flagImg" src='${flags.png}' alt='${name.official}'/><h1 class='country'>${name.official}</h1>`;
     })
     .join(' ');
-  refs.list.innerHTML = headerMarkup;
-  refs.descr.innerHTML = '';
+
+  redrawingMarkup(headerMarkup);
+}
+
+function redrawingMarkup(header, description = '') {
+  refs.list.innerHTML = header;
+  refs.descr.innerHTML = description;
 }
