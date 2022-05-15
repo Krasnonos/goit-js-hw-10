@@ -1,6 +1,7 @@
+var debounce = require('debounce');
+
 import './css/styles.css';
 import { fetchCountries } from './fetchCountries.js';
-var debounce = require('debounce');
 
 const DEBOUNCE_DELAY = 300;
 
@@ -29,5 +30,11 @@ function checkCountriesQuantity(countriesArrey) {
 }
 
 function createMarkupForOneCountry(country) {
-  const { capital, flags, languages, name, population } = country[0];
+  const { flags, name, capital, languages, population } = country[0];
+
+  const langArray = Object.values(country[0].languages);
+  const langString = langArray.join(', ');
+  const markUp = `<img class='${flags}' src='${flags.png}' alt='${capital}' /><h1 class='country'>${name.official}</h1><p class='capital'>${capital}</p><p class='population'>${population}</p><p class='languages'>${langString}</p>`;
+
+  refs.list.innerHTML = markUp;
 }
