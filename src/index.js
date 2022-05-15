@@ -1,4 +1,5 @@
 var debounce = require('debounce');
+import Notiflix from 'notiflix';
 
 import './css/styles.css';
 import { fetchCountries } from './fetchCountries.js';
@@ -22,6 +23,7 @@ function checkCountriesQuantity(countriesArrey) {
   const quantity = countriesArrey.length;
   console.log(quantity);
   if (quantity > 10) {
+    Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
   } else if (quantity >= 2 && quantity <= 10) {
     console.log(quantity);
   } else {
