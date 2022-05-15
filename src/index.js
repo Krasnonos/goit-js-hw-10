@@ -23,8 +23,11 @@ function onSearchCountry(e) {
     return;
   }
 
-  fetchCountries(countryName).then(checkCountriesQuantity);
-  // .catch(Notiflix.Notify.failure('Oops, there is no country with that name'));
+  fetchCountries(countryName)
+    .then(checkCountriesQuantity)
+    .catch(err => {
+      Notiflix.Notify.failure('Qui timide rogat docet negare');
+    });
 }
 
 function checkCountriesQuantity(countriesArrey) {
