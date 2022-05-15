@@ -36,16 +36,14 @@ function createMarkupForOneCountry(country) {
 
   const langArray = Object.values(country[0].languages);
   const langString = langArray.join(', ');
-  return `<img class='${flags}' src='${flags.png}' alt='${capital}' /><h1 class='country'>${name.official}</h1><p class='capital'>${capital}</p><p class='population'>${population}</p><p class='languages'>${langString}</p>`;
+  return `<img class="flagImg" src='${flags.png}' alt='${name.official}' /><h1 class='country'>${name.official}</h1><p class='capital'>${capital}</p><p class='population'>${population}</p><p class='languages'>${langString}</p>`;
 }
 
 function createMarkupForFewCountry(countries) {
   return countries
     .map(country => {
-      const { flags, name, capital, languages, population } = country;
-      const langArray = Object.values(country.languages);
-      const langString = langArray.join(', ');
-      return `<img class='${flags}' src='${flags.png}' alt='${capital}' /><h1 class='country'>${name.official}</h1><p class='capital'>${capital}</p><p class='population'>${population}</p><p class='languages'>${langString}</p>`;
+      const { flags, name, capital } = country;
+      return `<img class="flagImg" src='${flags.png}' alt='${name.official}'/><h1 class='country'>${name.official}</h1>`;
     })
     .join(' ');
 }
