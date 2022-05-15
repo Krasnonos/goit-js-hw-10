@@ -48,7 +48,7 @@ function createMarkupForOneCountry(country) {
   const langArray = Object.values(country[0].languages);
   const langString = langArray.join(', ');
   const headerMarkup = `<img class="flagImg" src='${flags.png}' alt='${name.official}' /><h1 class='country'>${name.official}</h1>`;
-  const descriprionMarkup = `<p class='capital'>${capital}</p><p class='population'>${population}</p><p class='languages'>${langString}</p>`;
+  const descriprionMarkup = `<p class='capital'>Capital: ${capital}</p><p class='population'> Population: ${population}</p><p class='languages'>Languages: ${langString}</p>`;
 
   redrawingMarkup(headerMarkup, descriprionMarkup);
 }
