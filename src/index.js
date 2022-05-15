@@ -16,6 +16,11 @@ refs.input.addEventListener('input', debounce(onSearchCountry, DEBOUNCE_DELAY));
 
 function onSearchCountry(e) {
   const countryName = e.target.value.trim();
+  if (countryName === '') {
+    refs.list.innerHTML = '';
+    refs.descr.innerHTML = '';
+    return;
+  }
   fetchCountries(countryName).then(checkCountriesQuantity);
   // .catch(Notiflix.Notify.failure('Oops, there is no country with that name'));
 }
